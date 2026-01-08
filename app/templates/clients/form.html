@@ -1,0 +1,30 @@
+{% extends '/layout.html' %}
+{% import 'helpers.html' as helpers %}
+{% block body %}
+    <h3>Crear cliente</h3>
+
+    {{ helpers.error_summary() }}
+
+    <form method="post">
+        <div class="row mb-2">
+            <label class="col-md-2 col-form-label">Nombre</label>
+            <div class="col-md-4">
+                <input name="name" class="form-control" autocomplete="off" required />
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <label class="col-md-2 col-form-label">Dirección</label>
+            <div class="col-md-4">
+                <input name="address" class="form-control" autocomplete="off" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 offset-md-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ url_for('.index') }}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}

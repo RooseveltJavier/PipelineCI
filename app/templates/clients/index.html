@@ -1,0 +1,46 @@
+{% extends '/layout.html' %}
+{% import 'helpers.html' as helpers %}
+{% block body %}
+    <h3>Clientes</h3>
+
+    {{ helpers.error_summary() }}
+
+    <a href="{{ url_for('.create')}}" class="btn btn-primary mb-3">Nuevo</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+            </tr>            
+        </thead>
+        <tbody>
+            {% for client in list %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('.delete', id=client.id) }}" onclick="return deleteRow(this)">Eliminar</a>
+                    </td>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.address }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        function deleteRow(link) {
+            if (confirm('Deseas eliminar el registro?')) {
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = link.href;
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            return false;
+        }
+    </script>
+{% endblock %}

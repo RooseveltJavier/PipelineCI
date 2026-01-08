@@ -1,0 +1,11 @@
+{%- macro error_summary() %}
+    {% with errors = get_flashed_messages() %}
+        {% if errors %}
+            <ul class="alert alert-danger">
+            {% for error in errors  %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endmacro %}

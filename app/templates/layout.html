@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>App ejemplo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-5.3.3.min.css') }}">
+    </head>
+    <body>
+        <div class="navbar navbar-expand-lg bg-dark shadow">
+            <div class="container">
+              <a href="/" class="navbar-brand text-white">App ejemplo</a>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                {% if session['user_id'] %}
+                  <ul class="navbar-nav">
+                    <li class="nav-item text-white">
+                      <a href="{{ url_for('clients.index') }}" class="nav-link text-white">Clientes</a>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav ms-md-auto">                  
+                    <li class="navbar-text text-white">
+                      {{ session['user_login'] }}
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{ url_for('account.logout') }}" class="nav-link text-white">Salir</a>
+                    </li>
+                  </ul>
+                {% else %}
+                  <ul class="navbar-nav ms-md-auto">
+                    <li class="nav-item">
+                      <a href="{{ url_for('account.login') }}" class="nav-link text-white">Ingresar</a>
+                    </li>   
+                  </ul>                 
+                 {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="container mt-4">
+            {% block body %}{% endblock %}
+          </div>
+          <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.bundle-5.3.3.min.js') }}"></script>
+          {% block scripts %}{% endblock %}
+    </body>
+</html>
