@@ -6,8 +6,8 @@ pipeline {
         IMAGE_TAG  = "latest"
         IMAGE      = "${env.IMAGE_NAME}:${env.IMAGE_TAG}"
         CONTAINER  = "app_demo"
-        HOST_DATA  = "/home/ec2-user/data"
-        CONTAINER_DATA = "/instance"
+        HOST_DATA  = "/var/lib/app_demo"
+        CONTAINER_DATA = "/app/instance"
     }
 
     stages {
