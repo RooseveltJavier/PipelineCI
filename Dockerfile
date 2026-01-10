@@ -11,6 +11,8 @@ run mkdir instance
 
 copy . .
 
-expose 8090
+env APP_PORT=8090
 
-cmd waitress-serve --host 0.0.0.0 --call app:create_app
+expose $APP_PORT
+
+cmd sh -c "waitress-serve --host 0.0.0.0 --port=$APP_PORT --call app:create_app"
