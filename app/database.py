@@ -3,8 +3,7 @@ import click
 from flask import current_app
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 
 engine = create_engine(current_app.config['DB_CONNECTION'], echo=True)
 db_session = scoped_session(sessionmaker(
@@ -26,11 +25,15 @@ def close_db(e=None):
     db_session.remove()
 
 
-@click.command('init-db')
-def init_db_command():
+def create_db():
     from app import models
 
     DBModel.metadata.create_all(bind=engine)
+
+
+@click.command('init-db')
+def init_db_command():
+    create_db()
 
 
 @click.command('create-user')
