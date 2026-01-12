@@ -17,6 +17,19 @@ pipeline {
             }
         }
 
+        stage('Unit Tests') {
+            steps {
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install -r requirements.txt
+                    pip install pytest
+                    export PYTHONPATH=.
+                    pytest
+                '''
+            }
+        }
+
         stage('Build Image') {
             steps {
                 sh '''
@@ -25,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Restart Application') {
+        stage('Deploy') {
             steps {
                 sh '''
                     if [ "$(docker ps -aq -f name=^/${CONTAINER}$)" ]; then
@@ -51,6 +64,10 @@ pipeline {
         
         failure {
             echo "Despliegue fallido"
+        }
+
+        always {
+            sh 'rm -rf venv'
         }
     }
 }
