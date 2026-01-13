@@ -17,6 +17,7 @@ def index():
 
 
 @bp.route('/clients/create', methods=['GET', 'POST'])
+@authorize()
 def create():
     if request.method == 'POST':
         client = Client()     
@@ -33,6 +34,7 @@ def create():
 
 
 @bp.route('/clients/delete/<int:id>', methods=['POST'])
+@authorize()
 def delete(id):
     client = Client.query.filter(Client.id == id).first()
 
