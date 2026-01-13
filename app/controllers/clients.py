@@ -24,6 +24,7 @@ def create():
 
         client.name = request.form['name']
         client.address = request.form['address']
+        client.cedula = request.form['cedula']
 
         db_session.add(client)
         db_session.commit()
