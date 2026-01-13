@@ -23,6 +23,7 @@
                         <a href="{{ url_for('.delete', id=client.id) }}" onclick="return deleteRow(this)">Eliminar</a>
                     </td>
                     <td></td>
+                    <td>{{ client.ced }}</td>
                     <td>{{ client.name }}</td>
                     <td>{{ client.address }}</td>
                 </tr>
